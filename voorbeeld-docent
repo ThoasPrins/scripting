@@ -1,0 +1,26 @@
+import os
+import csv
+
+
+filePath = os.getcwd()
+fileOld = "\\".join([filePath,"Klanten-oud.csv"])
+fileNew = "\\".join([filePath,"Klanten-nieuw.csv"])
+
+klantenNieuwFile = open(fileNew,mode='r',newline='')
+klantenNewCSV = csv.reader(klantenNieuwFile,delimiter=';')
+next(klantenNewCSV)
+KNList = list(klantenNewCSV)
+
+klantenOldFile = open(fileOld,mode='r',newline='')
+klantenOldCSV = csv.reader(klantenOldFile,delimiter=';')
+next(klantenOldCSV)
+KOList = list(klantenOldCSV)
+
+
+for lineNew in KNList:
+    for lineOld in KOList:
+        if lineNew[6] == lineOld[6]:
+            break
+        
+    else:
+        print(f"{lineNew[0]} is een nieuwe klant.")
