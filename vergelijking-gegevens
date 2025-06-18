@@ -1,0 +1,57 @@
+#python code voor het vergelijken van gegevens van een csv bestand met nieuwe gegevens met een csv bestand met oude gegevens
+import csv
+import datetime
+
+print(f'Datum van starten: {datetime.datetime.now()}')
+
+
+filePathNieuw = 'Klanten-nieuw.csv' 
+filePathOud = 'Klanten-oud.csv'
+aantaln = 0
+aantalo = 0
+
+#eventueel mogelijk
+
+#with open(filePathNieuw, 'r') as KlantenNieuw:
+    #reader = csv.reader(KlantenNieuw, delimiter = ';')
+    #for row in reader:
+        #print(row[6])
+
+#with open(filePathOud, 'r') as KlantenOud:
+    #reader = csv.reader(KlantenOud, delimiter = ';')
+
+#for row_N in KlantenNieuw:
+    #for row_O in KlantenOud:
+        #if row_N[6] == row_O[6]:
+            #break
+    #else:
+        #print (f"{row_N} is een nieuwe klant")
+
+
+#open van het bestand met de nieuwe gegevens
+KlantenNieuw = open(filePathNieuw, 'r', newline='')
+csv_N = csv.reader(KlantenNieuw, delimiter = ';' )
+KNList = list(csv_N)
+
+#open van het bestand met de oude gegevens
+KlantenOud = open(filePathOud, 'r', newline='')
+csv_O = csv.reader(KlantenOud, delimiter = ';') 
+KOList = list(csv_O)
+
+#het vergelijken van de nieuwe gegevens met de oude gegevens
+for row_N in KNList:
+    for row_O in KOList:
+        if row_N[6] == row_O[6]:
+            #behouden hoeveel oude gegevens er zijn
+            aantalo = aantalo + 1
+            break
+    else:
+        print (f"{row_N[0]} is een nieuwe klant")
+        #bijhouden hoeveel nieuwe gegevens er zijn
+        aantaln = aantaln + 1
+KlantenNieuw.close()
+KlantenOud.close()
+
+print(f'Aantal nieuwe klanten: {aantaln}')
+print(f'Aantal oude klanten: {aantalo}')
+print(f'Datum van succes: {datetime.datetime.now()}')
